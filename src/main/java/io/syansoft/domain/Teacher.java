@@ -11,7 +11,7 @@ import javax.persistence.*;
 @Entity
 @AllArgsConstructor @NoArgsConstructor
 @Table(name = "teacher")
-public class Teacher extends User{
+public class Teacher{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer teacherId;
@@ -19,4 +19,5 @@ public class Teacher extends User{
     private String lastName;
     @NonNull
     private String email;
+    private User user;
 }

@@ -29,9 +29,9 @@ public class StudentService implements StudentServiceI {
             student.setEmail(studentDTO.getEmailId());
             student.setFirstName(studentDTO.getFirstName());
             student.setLastName(studentDTO.getLastName());
-            student.setPassword(studentDTO.getPassword());
-            student.setUserType(studentDTO.getUserType());
-            student.setEmailId(studentDTO.getEmailId());
+            student.getUser().setPassword(studentDTO.getPassword());
+            student.getUser().setUserType(studentDTO.getUserType());
+            student.getUser().setEmail(studentDTO.getEmailId());
             studentRepository.save(student);
             return student;
         }

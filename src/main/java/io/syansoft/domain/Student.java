@@ -5,15 +5,12 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.NonNull;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 @Data
 @Entity
 @AllArgsConstructor @NoArgsConstructor
-public class Student extends User{
+public class Student{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer studentId;
@@ -24,6 +21,7 @@ public class Student extends User{
     private Integer rollNo;
     @NonNull
     private String email;
+    private User user;
 
 
 }

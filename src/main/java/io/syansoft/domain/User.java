@@ -8,10 +8,7 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
-import javax.persistence.Entity;
-import javax.persistence.EnumType;
-import javax.persistence.Enumerated;
-import javax.persistence.Id;
+import javax.persistence.*;
 import java.util.Collection;
 import java.util.List;
 
@@ -19,11 +16,12 @@ import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor
 @ToString
-//@Entity
+@Entity
 public class User implements UserDetails {
-//    @Id
-//    private String id;
-    private String emailId;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Integer id;
+    private String email;
     private String password;
     @Enumerated(EnumType.STRING)
     private UserType userType;
@@ -32,12 +30,13 @@ public class User implements UserDetails {
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        return List.of(new SimpleGrantedAuthority(roles.name()));
+        return null;
+//                List.of(new SimpleGrantedAuthority(roles.name()));
     }
 
     @Override
     public String getUsername() {
-        return this.emailId;
+        return this.email;
     }
 
     @Override

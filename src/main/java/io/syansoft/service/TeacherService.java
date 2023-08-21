@@ -27,9 +27,9 @@ public class TeacherService implements TeacherServiceI{
             teacher.setEmail(teacherDTO.getEmailId());
             teacher.setFirstName(teacherDTO.getFirstName());
             teacher.setLastName(teacherDTO.getLastName());
-            teacher.setPassword(teacherDTO.getPassword());
-            teacher.setUserType(teacherDTO.getUserType());
-            teacher.setEmailId(teacherDTO.getEmailId());
+            teacher.getUser().setPassword(teacherDTO.getPassword());
+            teacher.getUser().setUserType(teacherDTO.getUserType());
+            teacher.getUser().setEmail(teacherDTO.getEmailId());
             return teacherRepository.save(teacher);
         }
         return null;
