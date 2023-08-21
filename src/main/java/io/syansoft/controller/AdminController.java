@@ -39,6 +39,4 @@ public class AdminController {
     public Student addStudent(@RequestBody StudentDTO studentDTO){
         return studentService.addStudent(studentDTO);
     }
-
-
 }
