@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Objects;
 
 @Service
 public class SubjectService implements SubjectsServiceI{
@@ -14,5 +15,13 @@ public class SubjectService implements SubjectsServiceI{
     @Override
     public List<Subjects> getAllSubjects(){
         return subjectsRepository.findAll();
+    }
+
+    @Override
+    public Subjects addSubjects(Subjects subjects){
+        Subjects subjectDB = subjectsRepository.findBySubjectCode(subjects.getSubjectCode());
+        if(Objects.isNull(subjectDB))
+        return subjectsRepository.save(subjects);
+        return null;
     }
 }

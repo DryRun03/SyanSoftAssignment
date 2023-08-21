@@ -9,4 +9,5 @@ import java.util.List;
 public interface SubjectsServiceI {
 
     public List<Subjects> getAllSubjects();
+    public Subjects addSubjects(Subjects subjects);
 }

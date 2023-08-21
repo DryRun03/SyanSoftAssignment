@@ -8,6 +8,7 @@ import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Objects;
 import java.util.Optional;
 
 @Service
@@ -23,11 +24,15 @@ public class StudentService implements StudentServiceI {
     @Override
     public Student addStudent(StudentDTO studentDTO) {
         Student student = new Student();
-        student.setEmail(studentDTO.getEmailId());
-        student.setFirstName(studentDTO.getFirstName());
-        student.setLastName(studentDTO.getLastName());
-//        student.setRollNo();
-        return studentRepository.save(student);
+        student = studentRepository.findByEmail(studentDTO.getEmailId());
+        if(Objects.isNull(student)){
+            student.setEmail(studentDTO.getEmailId());
+            student.setFirstName(studentDTO.getFirstName());
+            student.setLastName(studentDTO.getLastName());
+            studentRepository.save(student);
+            return student;
+        }
+        return null;
     }
 
     @Override
