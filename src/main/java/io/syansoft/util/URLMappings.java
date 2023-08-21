@@ -24,4 +24,6 @@ public class URLMappings {
     public static final String GET_ALL_SUBJECTS = "/getAllSubjects";
     public static final String ADD_SUBJECTS = "/addSubjects";
 
+    //Auth
+    public static final String AUTH = "/auth";
 }

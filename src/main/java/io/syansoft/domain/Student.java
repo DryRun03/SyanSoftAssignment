@@ -5,13 +5,15 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.NonNull;
 
-import javax.persistence.*;
-import java.util.List;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 
 @Data
 @Entity
 @AllArgsConstructor @NoArgsConstructor
-public class Student {
+public class Student extends User{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer studentId;
@@ -22,7 +24,6 @@ public class Student {
     private Integer rollNo;
     @NonNull
     private String email;
-//    @OneToMany
-//    private List<Subjects> subjects;
+
 
 }

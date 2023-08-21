@@ -25,8 +25,11 @@ public class TeacherService implements TeacherServiceI{
         teacher = teacherRepository.findByEmail(teacherDTO.getEmailId());
         if(Objects.isNull(teacher)){
             teacher.setEmail(teacherDTO.getEmailId());
-            teacher.setFirstName(teacher.getFirstName());
-            teacher.setLastName(teacher.getLastName());
+            teacher.setFirstName(teacherDTO.getFirstName());
+            teacher.setLastName(teacherDTO.getLastName());
+            teacher.setPassword(teacherDTO.getPassword());
+            teacher.setUserType(teacherDTO.getUserType());
+            teacher.setEmailId(teacherDTO.getEmailId());
             return teacherRepository.save(teacher);
         }
         return null;
