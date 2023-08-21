@@ -18,4 +18,6 @@ public class URLMappings {
     public static final String ADMIN = PREFIX + "/admin" ;
     public static final String EDIT_STUDENT = "/editStudent" ;
     public static final String EDIT_TEACHER = "/editTeacher" ;
+    public static final String SUBJECT = PREFIX + "/subject";
+    public static final String GET_ALL_SUBJECTS = "/getAllSubjects";
 }
