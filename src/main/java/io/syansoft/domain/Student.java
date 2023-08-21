@@ -22,7 +22,7 @@ public class Student {
     private Integer rollNo;
     @NonNull
     private String email;
-    @OneToMany
-    private List<Subjects> subjects;
+//    @OneToMany
+//    private List<Subjects> subjects;
 
 }
