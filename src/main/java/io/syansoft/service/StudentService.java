@@ -5,9 +5,11 @@ import io.syansoft.dto.StudentDTO;
 import io.syansoft.repository.StudentRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Lazy;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 
+@Service
 public class StudentService implements StudentServiceI {
 
     @Autowired @Lazy

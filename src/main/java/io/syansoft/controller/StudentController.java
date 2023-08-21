@@ -2,7 +2,6 @@ package io.syansoft.controller;
 
 import io.syansoft.domain.Student;
 import io.syansoft.dto.StudentDTO;
-import io.syansoft.service.StudentService;
 import io.syansoft.service.StudentServiceI;
 import io.syansoft.util.URLMappings;
 import org.springframework.beans.factory.annotation.Autowired;
