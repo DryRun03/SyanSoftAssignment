@@ -10,4 +10,6 @@ import java.util.List;
 public interface StudentRepository extends JpaRepository<Student,Integer> {
 
     public List<Student> findAll();
+
+    public Student findByEmail(String email);
 }

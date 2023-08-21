@@ -12,4 +12,6 @@ public interface TeacherServiceI {
     public List<Teacher> getAllTeacher();
 
     public Teacher addTeacher(TeacherDTO teacherDTO);
+
+    public Teacher editTeacher(TeacherDTO teacherDTO);
 }

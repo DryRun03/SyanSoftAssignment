@@ -20,8 +20,4 @@ public class TeacherController {
         return teacherService.getAllTeacher();
     }
 
-    @PostMapping(URLMappings.ADD_TEACHERS)
-    public Teacher addTeacher(@RequestBody TeacherDTO teacherDTO){
-        return teacherService.addTeacher(teacherDTO);
-    }
 }

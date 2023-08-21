@@ -11,5 +11,7 @@ public interface StudentServiceI {
 
     public List<Student> getAllStudents();
 
-    Student addStudent(StudentDTO studentDTO);
+    public Student addStudent(StudentDTO studentDTO);
+
+    public Student editStudent(StudentDTO studentDTO);
 }

@@ -1,6 +1,7 @@
 package io.syansoft.service;
 
 import io.syansoft.domain.Teacher;
+import io.syansoft.domain.Teacher;
 import io.syansoft.dto.TeacherDTO;
 import io.syansoft.repository.TeacherRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,9 +21,18 @@ public class TeacherService implements TeacherServiceI{
     @Override
     public Teacher addTeacher(TeacherDTO teacherDTO) {
         Teacher teacher = new Teacher();
-        teacher.setEmailId(teacherDTO.getEmailId());
+        teacher.setEmail(teacherDTO.getEmailId());
         teacher.setFirstName(teacher.getFirstName());
         teacher.setLastName(teacher.getLastName());
         return teacherRepository.save(teacher);
+    }
+
+    @Override
+    public Teacher editTeacher(TeacherDTO teacherDTO) {
+        Teacher teacher = teacherRepository.findByEmail(teacherDTO.getEmailId());
+        teacher.setFirstName(teacherDTO.getFirstName());
+        teacher.setLastName(teacherDTO.getLastName());
+        teacherRepository.save(teacher);
+        return teacher;
     }
 }
