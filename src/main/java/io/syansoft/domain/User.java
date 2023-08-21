@@ -19,7 +19,10 @@ import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor
 @ToString
+//@Entity
 public class User implements UserDetails {
+//    @Id
+//    private String id;
     private String emailId;
     private String password;
     @Enumerated(EnumType.STRING)

@@ -26,4 +26,7 @@ public class URLMappings {
 
     //Auth
     public static final String AUTH = "/auth";
+
+    //User
+    public static final String USER = PREFIX + "/user" ;
 }
