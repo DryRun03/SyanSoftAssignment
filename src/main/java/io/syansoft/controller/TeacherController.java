@@ -20,4 +20,14 @@ public class TeacherController {
         return teacherService.getAllTeacher();
     }
 
+    @PostMapping(URLMappings.ADD_TEACHERS)
+    public Teacher addTeacher(@RequestBody TeacherDTO teacher){
+        return teacherService.addTeacher(teacher);
+    }
+
+    @PutMapping(URLMappings.EDIT_TEACHER)
+    public Teacher editteacher(@RequestBody TeacherDTO teacherDTO){
+        return teacherService.editTeacher(teacherDTO);
+    }
+
 }

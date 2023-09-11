@@ -15,7 +15,7 @@ public class WebConfig {
 
     @Bean
     public UserDetailsService userDetailsService(){
-        UserDetails user1 = User.builder().username("pankaj")
+        UserDetails user1 = User.builder().username("pankaj.garg@gmail.com")
                 .password(bCryptPasswordEncoder().encode("pankaj"))
                 .roles("ADMIN").build();
         UserDetails user2 = User.builder().username("garg")

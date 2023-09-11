@@ -22,4 +22,8 @@ public class SubjectsController {
         return subjectsServiceI.addSubjects(subjects);
     }
 
+    @PutMapping("/editSubject")
+    public Subjects editSubjects(@RequestBody Subjects subjects){
+        return subjectsServiceI.editSubjects(subjects);
+    }
 }

@@ -1,6 +1,7 @@
 package io.syansoft.service;
 
 import io.syansoft.domain.Subjects;
+import io.syansoft.domain.Teacher;
 import io.syansoft.repository.SubjectsRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -21,7 +22,19 @@ public class SubjectService implements SubjectsServiceI{
     public Subjects addSubjects(Subjects subjects){
         Subjects subjectDB = subjectsRepository.findBySubjectCode(subjects.getSubjectCode());
         if(Objects.isNull(subjectDB))
-        return subjectsRepository.save(subjects);
+            return subjectsRepository.save(subjects);
+        return null;
+    }
+
+    @Override
+    public Subjects editSubjects(Subjects subject) {
+        Subjects subjectsDB =  subjectsRepository.findBySubjectCode(subject.getSubjectCode());
+        if(!Objects.isNull(subjectsDB)){
+            subjectsDB.setSubjectCode(subject.getSubjectCode());
+            subjectsDB.setName(subject.getName());
+            subjectsRepository.save(subjectsDB);
+            return subjectsDB;
+        }
         return null;
     }
 }
