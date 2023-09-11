@@ -24,6 +24,8 @@ public class User implements UserDetails {
     private String email;
     private String userName;
     private String password;
+    @Transient
+    private String token;
     @Enumerated(EnumType.STRING)
     private UserType userType;
     @Enumerated(EnumType.STRING)
