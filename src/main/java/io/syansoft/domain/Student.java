@@ -22,6 +22,7 @@ public class Student{
     @NonNull
     private String email;
     private User user;
+//    private String userName;
 
 
 }

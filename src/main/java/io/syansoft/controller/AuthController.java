@@ -43,10 +43,10 @@ public class AuthController {
 
     @PostMapping(URLMappings.LOGIN)
     public ResponseEntity<JwtResponse> login(@RequestBody JwtRequest request){
-        doAuthenticate(request.getUsername(),request.getPassword());
+//        doAuthenticate(request.getUsername(),request.getPassword());
         UserDetails userDetails= userDetailsService.loadUserByUsername(request.getUsername());
-        String token = tokenUtil.generateToken(userDetails);
         User user = userRepository.findByEmail(request.getUsername());
+        String token = tokenUtil.generateTokenWithRoles(userDetails,user);
             user.setToken(token);
             redisService.saveTokenInRedis(user.getUsername(),token);
         JwtResponse response = JwtResponse.builder()

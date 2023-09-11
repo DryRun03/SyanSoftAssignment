@@ -21,4 +21,14 @@ public class StudentController {
         return studentService.getAllStudents();
     }
 
+    @PostMapping(URLMappings.ADD_STUDENTS)
+    public Student addStudent(@RequestBody StudentDTO studentDTO){
+        return studentService.addStudent(studentDTO);
+    }
+
+    @PutMapping(URLMappings.EDIT_STUDENT)
+    public Student editStudent(@RequestBody  StudentDTO studentDTO){
+        return studentService.editStudent(studentDTO);
+    }
+
 }

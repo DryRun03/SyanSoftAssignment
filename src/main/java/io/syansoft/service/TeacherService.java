@@ -7,6 +7,7 @@ import io.syansoft.dto.TeacherDTO;
 import io.syansoft.repository.TeacherRepository;
 import io.syansoft.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -16,6 +17,9 @@ import java.util.Objects;
 public class TeacherService implements TeacherServiceI{
 
     @Autowired private TeacherRepository teacherRepository;
+
+    @Autowired
+    private PasswordEncoder passwordEncoder;
 
     @Autowired private UserRepository userRepository;
     @Override
@@ -35,9 +39,11 @@ public class TeacherService implements TeacherServiceI{
                 User user = new User();
                 user.setUserName(teacherDTO.getEmailId());
                 user.setEmail(teacherDTO.getEmailId());
-                user.setPassword(teacherDTO.getPassword());
+                user.setPassword(passwordEncoder.encode(teacherDTO.getPassword()));
                 userRepository.save(user);
-                return teacherRepository.save(teacher);
+//                teacher.setUser(user);
+                teacherRepository.save(teacher);
+                return teacher;
         }
         return null;
     }

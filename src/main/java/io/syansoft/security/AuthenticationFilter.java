@@ -1,5 +1,6 @@
 package io.syansoft.security;
 
+import io.syansoft.service.AuthenticationService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,6 +32,8 @@ public class AuthenticationFilter extends OncePerRequestFilter {
     @Autowired @Lazy
     private UserDetailsService userDetailsService;
 
+    @Autowired AuthenticationService authenticationService;
+
 
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain chain)
@@ -50,9 +53,8 @@ public class AuthenticationFilter extends OncePerRequestFilter {
             logger.info("JWT Token does not begin with Bearer String");
         }
         if (username != null && SecurityContextHolder.getContext().getAuthentication() == null) {
-            UserDetails userDetails = userDetailsService.loadUserByUsername(username);
+            UserDetails userDetails = authenticationService.loadUserByUsername(username);
             if (jwtTokenUtil.validateToken(jwtToken, userDetails)) {
-
                 UsernamePasswordAuthenticationToken usernamePasswordAuthenticationToken = new UsernamePasswordAuthenticationToken(
                         userDetails, null, userDetails.getAuthorities());
                 usernamePasswordAuthenticationToken

@@ -74,11 +74,11 @@ public class JWTTokenUtil {
 
     public String generateTokenWithRoles(UserDetails userDetails, User user) {
         Map<String, Object> claims = new HashMap<>();
-        List<String> roles = userDetails.getAuthorities()
-                .stream()
-                .map(GrantedAuthority::getAuthority)
-                .collect(Collectors.toList());
-        claims.put("roles", roles);
+//        List<String> roles = userDetails.getAuthorities()
+//                .stream()
+//                .map(GrantedAuthority::getAuthority)
+//                .collect(Collectors.toList());
+//        claims.put("roles", roles);
         claims.put("userName",user.getUsername());
         claims.put("email",user.getEmail());
         claims.put("user",user);
