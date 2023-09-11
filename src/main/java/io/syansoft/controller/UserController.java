@@ -21,6 +21,7 @@ public class UserController {
 
     @PostMapping("/")
     public User addUser(User user){
+        user.setEmail(user.getUsername());
         return userRepository.save(user);
     }
 }
