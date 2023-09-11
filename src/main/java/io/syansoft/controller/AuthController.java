@@ -3,7 +3,10 @@ package io.syansoft.controller;
 import io.syansoft.domain.JwtRequest;
 import io.syansoft.domain.JwtResponse;
 //import io.syansoft.security.AuthenticationService;
+import io.syansoft.domain.User;
+import io.syansoft.repository.UserRepository;
 import io.syansoft.security.JWTTokenUtil;
+import io.syansoft.service.RedisService;
 import io.syansoft.util.URLMappings;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -21,11 +24,16 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.Objects;
+import java.util.Optional;
+
 @RestController
 @RequestMapping(URLMappings.AUTH)
 public class AuthController {
-    @Autowired
-    private JWTTokenUtil tokenUtil;
+    @Autowired private JWTTokenUtil tokenUtil;
+
+    @Autowired private UserRepository userRepository;
+    @Autowired private RedisService redisService;
     @Autowired @Lazy
     private AuthenticationManager manager;
 
@@ -38,6 +46,9 @@ public class AuthController {
         doAuthenticate(request.getUsername(),request.getPassword());
         UserDetails userDetails= userDetailsService.loadUserByUsername(request.getUsername());
         String token = tokenUtil.generateToken(userDetails);
+        User user = userRepository.findByEmail(request.getUsername());
+            user.setToken(token);
+            redisService.saveTokenInRedis(user.getUsername(),token);
         JwtResponse response = JwtResponse.builder()
                 .jwtToken(token)
                 .userName(userDetails.getUsername())
