@@ -37,7 +37,10 @@ public class SecurityConfig {
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception{
         RequestMatcher publicUrls = new OrRequestMatcher(
                 new AntPathRequestMatcher("/**"),
-                new AntPathRequestMatcher("/auth/login")
+                new AntPathRequestMatcher("/auth/login"),
+                new AntPathRequestMatcher("/swagger-ui/**"),
+                new AntPathRequestMatcher("/swagger-resources/**"),
+                new AntPathRequestMatcher("/webjars/**")
         );
         return http
                 .csrf(AbstractHttpConfigurer::disable)
