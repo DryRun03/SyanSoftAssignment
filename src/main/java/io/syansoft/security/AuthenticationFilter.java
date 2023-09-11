@@ -26,30 +26,31 @@ public class AuthenticationFilter extends OncePerRequestFilter {
     @Autowired @Lazy
     private JWTTokenUtil jwtTokenUtil;
 
+//    @Autowired private AuthenticationService authenticationService;
+
     @Autowired @Lazy
     private UserDetailsService userDetailsService;
 
 
     @Override
-    protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
+    protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain chain)
+            throws ServletException, IOException {
         final String requestTokenHeader = request.getHeader("Authorization");
         String username = null;
         String jwtToken = null;
         if (requestTokenHeader != null && requestTokenHeader.startsWith("Bearer ")) {
             jwtToken = requestTokenHeader.substring(7);
-            System.out.println(jwtToken.toString());
             try {
                 username = jwtTokenUtil.getUsernameFromToken(jwtToken);
-
             } catch (Exception e) {
                 e.printStackTrace();
                 throw new AccessDeniedException("You Are not Authorised");
             }
         } else {
-            logger.warn("JWT Token does not begin with Bearer String");
+            logger.info("JWT Token does not begin with Bearer String");
         }
         if (username != null && SecurityContextHolder.getContext().getAuthentication() == null) {
-            UserDetails userDetails = this.userDetailsService.loadUserByUsername(username);
+            UserDetails userDetails = userDetailsService.loadUserByUsername(username);
             if (jwtTokenUtil.validateToken(jwtToken, userDetails)) {
 
                 UsernamePasswordAuthenticationToken usernamePasswordAuthenticationToken = new UsernamePasswordAuthenticationToken(
@@ -59,7 +60,7 @@ public class AuthenticationFilter extends OncePerRequestFilter {
                 SecurityContextHolder.getContext().setAuthentication(usernamePasswordAuthenticationToken);
             }
         }
-        filterChain.doFilter(request, response);
+        chain.doFilter(request, response);
     }
 }
 

@@ -2,6 +2,7 @@ package io.syansoft.controller;
 
 import io.syansoft.domain.JwtRequest;
 import io.syansoft.domain.JwtResponse;
+//import io.syansoft.security.AuthenticationService;
 import io.syansoft.security.JWTTokenUtil;
 import io.syansoft.util.URLMappings;
 import org.slf4j.Logger;
@@ -28,13 +29,14 @@ public class AuthController {
     @Autowired @Lazy
     private AuthenticationManager manager;
 
-    private UserDetailsService userDetailsService;
+    @Autowired private UserDetailsService userDetailsService;
+//    @Autowired private AuthenticationService authenticationService;
     private Logger logger = LoggerFactory.getLogger(AuthController.class);
 
     @PostMapping(URLMappings.LOGIN)
     public ResponseEntity<JwtResponse> login(@RequestBody JwtRequest request){
-        doAuthenticate(request.getEmail(),request.getPassword());
-        UserDetails userDetails= userDetailsService.loadUserByUsername(request.getEmail());
+        doAuthenticate(request.getUsername(),request.getPassword());
+        UserDetails userDetails= userDetailsService.loadUserByUsername(request.getUsername());
         String token = tokenUtil.generateToken(userDetails);
         JwtResponse response = JwtResponse.builder()
                 .jwtToken(token)
